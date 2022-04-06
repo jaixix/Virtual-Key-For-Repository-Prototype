@@ -11,15 +11,15 @@ public class RepositoryApp{
 		Scanner sc = new Scanner(System.in);
 		
 		List<String> rep = new LinkedList<String>();
-		rep.add("sample1.html"); //Pre-added sample file.
-		rep.add("sample2.txt"); //Pre-added sample file.
-		rep.add("sample3.js"); //Pre-added sample file.
+		rep.add("sample1.html"); //Pre-added sample files.
+		rep.add("sample2.txt");
+		rep.add("sample3.js");
 		
 		displayWelcomeScreen(); //Displaying Welcome Message.
 		int decision = 1; //Int var. to store if User wants to continue performing operations or stop.
 		do {
 			featuresList(); //To display features of the program.
-			System.out.println("Please provide a non-decimal Numeric Input corresponding to the above available options/operations : (1, 2 or 3) to continue");
+			System.out.println("Please provide a non-decimal Numeric Input corresponding to the above available options/operations : (1, 2 or 3) to continue!");
 			int input = sc.nextInt();
 			switch(input) {
 				case 1 :
@@ -42,9 +42,11 @@ public class RepositoryApp{
 	}
 
 	public static void continueStatements() {
-		System.out.println("----------------------------------------------------");
-		System.out.println("Do you wish to continue using the program? Enter 1 to CONTINUE or 0 to EXIT");	
-		System.out.println("----------------------------------------------------");
+		System.out.println("\n");
+		System.out.println("____________________________________________________________________________");
+		System.out.println("Do you wish to continue using the program?");
+		System.out.println("Enter 1 to CONTINUE or 0 to EXIT");
+		System.out.println("____________________________________________________________________________");
 	}
 
 	public static void exitProgram() {
@@ -59,22 +61,22 @@ public class RepositoryApp{
 		System.out.println("3) Search for a specific file from the current directory - Root\\\\");
 		System.out.println("4) Return to previous menu in the current directory - Root\\\\");
 		int inputOp = sc.nextInt();
-		switch(inputOp) {
+		switch(inputOp) { //Second switch case to get input for specific op.
 			case 1 :
 				sc.nextLine();
-				addFile(sc, rep);
+				addFile(sc, rep); //Method to add a new file to current directory.
 				break;
 			case 2 :
 				sc.nextLine();
-				deleteFile(sc, rep);
+				deleteFile(sc, rep); //Method to delete a file from current directory.
 				break;
 			case 3 :
 				sc.nextLine();
-				searchFile(sc, rep);
+				searchFile(sc, rep); //Method to search for a file in current directory.
 				break;
 			case 4 :
 				sc.nextLine();
-				featuresList();
+				featuresList(); //Redirecting to previous menu.
 				break;
 			default :
 				System.out.println("Oops! Looks like you provided a wrong input, please follow Input instructions specified above.");
@@ -113,21 +115,22 @@ public class RepositoryApp{
 		}
 	}
 
-	private static void displayFiles(List<String> rep) {
-		System.out.println("Files in Current Directory - Root:\\\\ \n");
-		Collections.sort(rep);
-		Iterator<String> it = rep.iterator();
-		while(it.hasNext()) {
-			System.out.println(it.next());
-		}
-	}
+//	public static void displayFiles(List<String> rep) {
+//		System.out.println("Files in Current Directory - Root:\\\\ \n");
+//		Collections.sort(rep);
+//		Iterator<String> it = rep.iterator();
+//		while(it.hasNext()) {
+//			System.out.println(it.next());
+//		}
+//	}
 
-	private static void displayWelcomeScreen() {
+	public static void displayWelcomeScreen() {
 		System.out.println("----------------------------------------------------");
 		System.out.println("  WELCOME TO THE VIRTUAL KEY FOR YOUR REPOSITORIES");
 		System.out.println("----------------------------------------------------");
 		System.out.println("        Developed by : JAIDEEP LALCHANDANI");
 		System.out.println("----------------------------------------------------");
+		System.out.println("");
 	}
 
 	public static void featuresList() {
@@ -140,5 +143,20 @@ public class RepositoryApp{
 		System.out.println("2.4 Return to Main Context");
 		System.out.println("3 Exit the program");
 		System.out.println("----------------------------------------------------");
-	}	
+	}
+	
+	public static void displayFiles(List<String> rep) {
+		System.out.println("Files in Current Directory : \n");
+		Collections.sort(rep);
+		Iterator<String> it = rep.iterator();
+		System.out.printf("%15s %29s", "Directory", "File Name");
+		System.out.println();
+		System.out.println("----------------------------------------------------");
+		while(it.hasNext()) {
+			System.out.format("%14s %32s", "Root:\\\\", it.next());
+			System.out.println();
+			System.out.println("----------------------------------------------------");
+		}
+		System.out.println("Total Number Of Files Present : " + rep.size());
+	}
 }
