@@ -1,6 +1,8 @@
 package RepositoryPackage;
 
+import java.io.IOException;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,8 +21,14 @@ public class RepositoryApp{
 		int decision = 1; //Int var. to store if User wants to continue performing operations or stop.
 		do {
 			featuresList(); //To display features of the program.
+			int input=100;
+			try {
 			System.out.println("Please provide a non-decimal Numeric Input corresponding to the above available options/operations : (1, 2 or 3) to continue!");
-			int input = sc.nextInt();
+			input = sc.nextInt();
+			
+			} catch(InputMismatchException e) {
+				sc.nextLine();
+			}
 			switch(input) {
 				case 1 :
 					displayFiles(rep); //Method to display existing files in current directory.
@@ -36,17 +44,22 @@ public class RepositoryApp{
 					
 			}
 		continueStatements(); //Asking user's choice to continue or stop.
-		decision = sc.nextInt();
+		try {
+			decision = sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("You have provided a wrong Input! Please follow Input Instructions.\n");
+				sc.nextLine();
+			}
 		} while(decision == 1);
 		System.out.println("Thankyou for using this program!");
 	}
 
 	public static void continueStatements() {
 		System.out.println("\n");
-		System.out.println("____________________________________________________________________________");
+		System.out.println("----------------------------------------------------");
 		System.out.println("Do you wish to continue using the program?");
 		System.out.println("Enter 1 to CONTINUE or 0 to EXIT");
-		System.out.println("____________________________________________________________________________");
+		System.out.println("");
 	}
 
 	public static void exitProgram() {
@@ -55,12 +68,17 @@ public class RepositoryApp{
 	}
 
 	public static void repOperations(Scanner sc, List<String> rep) {
-		System.out.println("Please Input a numeric value for required Operations : ");
+		System.out.println("Please Input a numeric value for required Operations : \n");
 		System.out.println("1) Add a file to the current directory - Root\\\\");
 		System.out.println("2) Delete a specific file from the current directory - Root\\\\");
 		System.out.println("3) Search for a specific file from the current directory - Root\\\\");
 		System.out.println("4) Return to previous menu in the current directory - Root\\\\");
-		int inputOp = sc.nextInt();
+		int inputOp=100;
+		try {
+		inputOp = sc.nextInt();
+		} catch(InputMismatchException e) {
+			System.out.println("You have provided a wrong Input! Please follow Input Instructions.");
+		}
 		switch(inputOp) { //Second switch case to get input for specific op.
 			case 1 :
 				sc.nextLine();
@@ -125,6 +143,7 @@ public class RepositoryApp{
 //	}
 
 	public static void displayWelcomeScreen() {
+		
 		System.out.println("----------------------------------------------------");
 		System.out.println("  WELCOME TO THE VIRTUAL KEY FOR YOUR REPOSITORIES");
 		System.out.println("----------------------------------------------------");
@@ -134,13 +153,13 @@ public class RepositoryApp{
 	}
 
 	public static void featuresList() {
-		System.out.println("FEATURES of this Program : ");
+		System.out.println("FEATURES of this Program : \n");
 		System.out.println("1 Display Files of Current Directory");
-		System.out.println("2 Operations :");
-		System.out.println("2.1 ADD a File to the Existing Directory");
-		System.out.println("2.2 DELETE a File from the Existing Directory (Case Sensitive)");
-		System.out.println("2.3 Search a File in Existing Directory (Case Sensitive)");
-		System.out.println("2.4 Return to Main Context");
+		System.out.println("2 Operations Menu");
+//		System.out.println("2.1 ADD a File to the Existing Directory");
+//		System.out.println("2.2 DELETE a File from the Existing Directory (Case Sensitive)");
+//		System.out.println("2.3 Search a File in Existing Directory (Case Sensitive)");
+//		System.out.println("2.4 Return to Main Context");
 		System.out.println("3 Exit the program");
 		System.out.println("----------------------------------------------------");
 	}
